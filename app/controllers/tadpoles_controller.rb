@@ -47,6 +47,13 @@ class TadpolesController < ApplicationController
     end
   end
 
+  def metamorphose
+    @frog = @tadpole.frog
+    @new_frog = Frog.create(name: @tadpole.name, color: @tadpole.color, pond_id: @frog.pond_id)
+    @tadpole.destroy
+    redirect_to @new_frog
+  end
+
   private
     def set_tadpole
       @tadpole = Tadpole.find(params[:id])
